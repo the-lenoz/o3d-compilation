@@ -34,17 +34,15 @@ elseif(LINUX_AARCH64)
     set(ISA_LIBS "")
     set(ISA_BUILD_BYPRODUCTS "")
 else() # Linux(x86) and WIN32
-    set(ISA_ARGS -DEMBREE_ISA_AVX=ON
-                 -DEMBREE_ISA_AVX2=ON
-                 -DEMBREE_ISA_AVX512=OFF
-                 -DEMBREE_ISA_SSE2=OFF
-                 -DEMBREE_ISA_SSE42=OFF
+    set(ISA_ARGS -DEMBREE_ISA_AVX=OFF
+                    -DEMBREE_ISA_AVX2=OFF
+                    -DEMBREE_ISA_AVX512=OFF
+                    -DEMBREE_ISA_SSE2=ON
+                    -DEMBREE_ISA_SSE42=ON
     )
-    # order matters. link libs with increasing ISA order.
-    set(ISA_LIBS embree_avx embree_avx2)
-    set(ISA_BUILD_BYPRODUCTS "<INSTALL_DIR>/${Open3D_INSTALL_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}embree_avx${CMAKE_STATIC_LIBRARY_SUFFIX}"
-                             "<INSTALL_DIR>/${Open3D_INSTALL_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}embree_avx2${CMAKE_STATIC_LIBRARY_SUFFIX}"
-    )
+       # order matters. link libs with increasing ISA order.
+       set(ISA_LIBS embree_sse42)
+       set(ISA_BUILD_BYPRODUCTS "<INSTALL_DIR>/${Open3D_INSTALL_LIB_DIR}/${CMAKE_STATIC_LIBRARY_PREFIX}embree_sse42${CMAKE_STATIC_LIBRARY_SUFFIX}" )
 endif()
 
 
